@@ -1,13 +1,6 @@
-body {
-    width: 1100px;
-    height: 3028px;
-    font-family: "Raleway", sans-serif;
-    font-weight: 400;
-}
-
 .header {
     width: 1100px;
-    height: 293px;
+    min-height: 293px;
     display: grid;
     grid-template-columns: 1fr min-content 1fr;
     align-items: center;
@@ -26,9 +19,12 @@ body {
     letter-spacing: 0px;
 }
 .header__menu-item_active {
+    text-decoration: none;
+}
+.header__menu-item_left {
     list-style: none;
 }
-.header__menu-item_underlilne {
+.header__menu-item_circle {
     list-style: circle;
 }
 .header__logo {
@@ -36,16 +32,20 @@ body {
     width: 139px;
     height: 104px;
 }
-.header__address {
-    margin-right: 50px;
-    margin-left: 184px;
-    max-width: 240px;
-    justify-self: end;
+.address_main {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     font-size: 18px;
     line-height: 24.3px;
+    font-style: normal;
+}
+
+.header__address {
+    margin-right: 50px;
+    margin-left: 184px;
+    max-width: 240px;
+    justify-self: end;
 }
 
 .cover {
@@ -65,7 +65,7 @@ body {
     position: relative;
     font-weight: 700;
     font-size: 100px;
-    line-height: 114.99999999999999%;
+    line-height: 114.99999999999999%;/*значение взято с макета - кто я чтобы перечить заказчику?*/
     letter-spacing: 30px;
     text-transform: uppercase;
     color: #FFFFFF;
@@ -75,14 +75,22 @@ body {
 .accent-span {
     display: block;
 }
+.text-end{
+ letter-spacing: 0px;  
+}
 .text-center {
-    /* text-align: center; не совпадает с макетом*/
-    margin: 20px auto auto 330px ;
+    margin-top: 20px;
+    text-align: center; 
+    /*спасибо за подсказку - отдельно обертывать букву = безумие какоето :-(
+    а может и не поменятся - если сюда захотят воткнуть длинное названиее-
+    вся концепция блока полетит к чертям.    
+    margin: 20px auto auto 330px ; не совпадает с макетом*/
 /* -50 из-зи падинга, еще 1пкс погрешности вылизает везде*/
 }
 .text-right {
-   margin: 20px auto auto 613px ; 
-/* text-align: right;
+    margin-top: 20px;
+    text-align: right;
+   /* margin: 20px auto auto 613px ; 
 margin: 21px -30px auto auto;
   у текста как-будто у текста пробел в конце слова и не удаляется
  спейсинг 30 из-за этого и по центру не выставлеяется втораая строка*/
@@ -92,10 +100,11 @@ margin: 21px -30px auto auto;
     position: absolute;
     top: 0px;
     left: 0px;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-    background-color: #00000060;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.6); /*странно - в описании было описано что #00000060 = 60%
+    какая-то лютая там формула для прозрачности в HEX...*/
 }
 
 .cover__description {
@@ -111,32 +120,33 @@ margin: 21px -30px auto auto;
     text-transform: uppercase;
     word-spacing: 20px;
     color: #FFFFFF;
+
 }
 .cover__button {
     background-color: transparent;
     font-weight: 500;
-    font-style: "Medium";
+    font-style: "Medium"; /*не пончл про св-ва фонтстайла данные из макета*/
     font-size: 22px;
     line-height: 100%;
     letter-spacing: 0px;
     text-align: center;
     text-transform: uppercase;
     color: white;
-    height: 51px;
+    min-height: 51px;
     width: 256px;
     border: 1px solid #FFFFFF;
+    cursor: pointer; /*добавил на кнопку - скорее всего имелось ввиду сюда, а не к дескрипшену*/
 }
-
 .lots {
     margin: 180px auto 0px  24px;
     width: 1052px;
-    height: 723px;
+    min-height: 723px;
 }
 /* при наложении на макет очень странный разброс по вертикали в 3 пкс
 маржины сняты с фигмы оставляю так возможно где то дефолтное св-во дает погрешность
 пока не доверяю экспортной картинке - она конвертируется два раза по пути*/
 .lots__title {
-    margin: 0px 891px 27px 40px;
+    margin: 0px auto 0px 40px;
     font-weight: 700;
     font-size: 40px;
     line-height: 100%;
@@ -147,18 +157,29 @@ margin: 21px -30px auto auto;
 .lots__cards {
     position: relative;
     display: flex;
+    flex-wrap:wrap;
     justify-content: space-between;
+    list-style: none;
+    
 }
+/*описание типовой карточки - положение для работоспособности оверлея, размер и положение вложения*/
 .lots__card {
-      position: relative;
+    margin-top: 27px;
+    position: relative;
+
+    width: 334px;
+    min-height: 596px;
+    padding: 48px 40px;
+    text-decoration: none;
+    }
+.lots__card-link {
+
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-    width: 334px;
-    height: 596px;
-    padding: 48px 40px;
-}
+    list-style: none;
 
+}
 .lots__lot-title {
     font-weight: 700;
     font-size: 22px;
@@ -172,38 +193,33 @@ margin: 21px -30px auto auto;
     z-index: 5;
 }
 
-.lots__article {
+.lots__text {
     font-size: 20px;
     line-height: 120%;
     letter-spacing: 0px;
     color:#FFFFFF;
     z-index: 5;
 }
-.lots__card-left {
-    position: relative;
+/*конкретизация карточек - описание подложки*/
+.lots__card_settings {
+        background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    
+}
+.lots__card-move {
     background-image: url(../images/card-lot-01.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
 }
 
-.lots__card-center {
-    position: relative;
+.lots__card-book {
     background-image: url(../images/card-lot-02.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
 }
 
-.lots__card-right {
-    position: relative;
+.lots__card-picture {
     background-image: url(../images/card-lot-03.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
 }
 .lots__more {
-    margin: 40px auto auto 40px;
+    margin: 30px auto auto 40px;
     font-size: 20px;
     line-height: 100%;
     letter-spacing: 0px;
@@ -211,15 +227,15 @@ margin: 21px -30px auto auto;
 }
 .about {
     margin: 120px auto auto 24px;
-    width: 1052px;
-    height: 595px;
+    min-width: 1052px;
+    min-height: 595px;
     display: grid;
     grid-template-columns: 1fr 693px;
 }
 .about__logo {
     margin: 35px auto auto 47px;
-    width: 240px;
-    height: 240px;
+    min-width: 240px;
+    min-height: 240px;
     background-color: #000000;
     border-radius: 120px;
     padding: 64px 45.52px 62px 46.48px;
@@ -250,8 +266,8 @@ margin: 21px -30px auto auto;
 }
 .footer {
     margin: 180px auto 0px auto;
-    width: 1100px;
-    height: 180px;
+    min-width: 1100px;
+    min-height: 180px;
         padding: 0px 50px;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -259,15 +275,8 @@ margin: 21px -30px auto auto;
 
 .footer__address {
     max-width: 264.57px;
-    height: 98px;
     justify-self: start;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-size: 18px;
-    line-height: 24.3px;
 }
-
 .footer__menu {
     width: 391.48px;
     text-align: center;
